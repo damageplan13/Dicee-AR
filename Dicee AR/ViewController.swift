@@ -14,6 +14,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
+    var diceArray = [SCNNode]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,13 +104,61 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         z: hitResult.worldTransform.columns.3.z
                     )
                     
+                    diceArray.append(diceNode)
+                    
                     sceneView.scene.rootNode.addChildNode(diceNode)
+                    
+                    rollDice(dice: diceNode)
+                    
                     
                 }
                 
             }
             
         }
+        
+    }
+    
+    func rollAllDices(){
+        
+        if !diceArray.isEmpty{
+            
+            for dice in diceArray{
+                
+                rollDice(dice : dice)
+                
+            }
+            
+        }
+        
+    }
+    
+    func rollDice(dice : SCNNode){
+        
+        let randomX = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
+        let randomZ = Float(arc4random_uniform(4) + 1) * (Float.pi/2)
+        
+        dice.runAction(SCNAction.rotateBy(
+            x: CGFloat(randomX * 5), //multiplied by 5 to add more rotations to make it more realistic
+            y: 0,
+            z: CGFloat(randomZ * 5),
+            duration: 0.5
+            )
+    )
+        
+        
+    }
+    
+    @IBAction func rollAgainButtonPressed(_ sender: UIBarButtonItem) {
+        
+        rollAllDices()
+        
+    }
+    
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        
+        rollAllDices()
         
     }
     
