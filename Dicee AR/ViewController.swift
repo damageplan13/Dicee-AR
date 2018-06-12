@@ -162,5 +162,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    @IBAction func clearAllDices(_ sender: UIBarButtonItem) {
+        
+        if !diceArray.isEmpty{
+            
+            for dice in diceArray{
+                dice.removeFromParentNode()
+            }
+            
+        }
+        
+    }
+    
+    
 
 }
