@@ -29,19 +29,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //        // Set the scene to the view
 //        sceneView.scene = scene
         
-        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.2, chamferRadius: 0.01)
+        let sphere = SCNSphere(radius: 0.2)
         
         let material1 = SCNMaterial()
         
-        material1.diffuse.contents = UIColor.cyan
+        material1.diffuse.contents = UIImage(named: "art.scnassets/fictional.jpg")
         
-        cube.materials = [material1]
+        sphere.materials = [material1]
         
         let node = SCNNode()
         
         node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
         
-        node.geometry = cube
+        node.geometry = sphere
         
         sceneView.scene.rootNode.addChildNode(node)
         
