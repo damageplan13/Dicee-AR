@@ -23,27 +23,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-//        // Create a new scene
-//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-//
-//        // Set the scene to the view
-//        sceneView.scene = scene
+        // Create a new scene
+        let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
         
-        let sphere = SCNSphere(radius: 0.2)
+        if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true){
         
-        let material1 = SCNMaterial()
+        diceNode.position = SCNVector3(0, 0, -0.1)
         
-        material1.diffuse.contents = UIImage(named: "art.scnassets/fictional.jpg")
-        
-        sphere.materials = [material1]
-        
-        let node = SCNNode()
-        
-        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
-        
-        node.geometry = sphere
-        
-        sceneView.scene.rootNode.addChildNode(node)
+        sceneView.scene.rootNode.addChildNode(diceNode)
+            
+        }
         
         sceneView.autoenablesDefaultLighting = true
     
